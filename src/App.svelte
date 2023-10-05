@@ -4,6 +4,10 @@
   import * as bootstrap from 'bootstrap';
 </script>
 
+<svelte:head>
+  <meta name="robots" content="noindex, nofollow" />
+</svelte:head>
+
 <header class="navbar bg-primary navbar-expand-md" data-bs-theme="dark">
   <nav class="container-md flex-wrap flex-md-nowrap" aria-label="Main navigation">
     <!-- svelte-ignore a11y-invalid-attribute -->
