@@ -25,7 +25,7 @@
           <a class="nav-link" aria-current="page" href="https://svelte.dev/">Svelte</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte"><i class="bi bi-github"></i></a>
+          <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte-demo"><i class="bi bi-github"></i></a>
         </li>
       </ul>
     </div>
