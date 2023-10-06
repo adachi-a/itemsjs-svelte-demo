@@ -154,6 +154,7 @@
 
   function updateSort(event) {
     selectedSort = event.target.value;
+    currentPage = 1;
     updateResults();
   }
 
