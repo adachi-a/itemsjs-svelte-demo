@@ -1,0 +1,37 @@
+{
+    "sortings": {
+        "ID(昇順)": {
+            "field": "id",
+            "order": "asc"
+        },
+        "ID(降順)": {
+            "field": "id",
+            "order": "desc"
+        },
+        "公開年(昇順)": {
+            "field": "year",
+            "order": "asc"
+        },
+        "公開年(降順)": {
+            "field": "year",
+            "order": "desc"
+        },
+        "上映時間(昇順)": {
+            "field": "minutes",
+            "order": "asc"
+        },
+        "上映時間(降順)": {
+            "field": "minutes",
+            "order": "desc"
+        }
+    },
+    "aggregations": {
+        "genres": {
+            "title": "ジャンル",
+            "conjunction": true
+        }
+    },
+    "removeStopWordFilter": true,
+    "native_search_enabled": false,
+    "custom_id_field": "id"
+}

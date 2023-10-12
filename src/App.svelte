@@ -1,5 +1,5 @@
 <script>
-  import Search from './Search.svelte';
+  import Search from './Search2.svelte';
   import './app.scss';
   import * as bootstrap from 'bootstrap';
 </script>
@@ -25,7 +25,7 @@
           <a class="nav-link" aria-current="page" href="https://svelte.dev/">Svelte</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte-demo"><i class="bi bi-github"></i></a>
+          <a class="nav-link" href="https://github.com/adachi-a/itemsjs-svelte-demo"><i class="bi bi-github" /></a>
         </li>
       </ul>
     </div>

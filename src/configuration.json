@@ -1,0 +1,34 @@
+{
+    "sortings": {
+        "ID(昇順)": {
+            "field": "id",
+            "order": "asc"
+        },
+        "ID(降順)": {
+            "field": "id",
+            "order": "desc"
+        },
+        "yomi_asc": {
+            "field": "yomi",
+            "order": "asc"
+        },
+        "yomi_desc": {
+            "field": "yomi",
+            "order": "desc"
+        }
+    },
+    "aggregations": {
+        "type": {
+            "title": "交番・駐在所の別",
+            "conjunction": false
+        },
+        "prefecture": {
+            "title": "都道府県",
+            "conjunction": false,
+            "size": 47
+        }
+    },
+    "removeStopWordFilter": true,
+    "native_search_enabled": false,
+    "custom_id_field": "id"
+}

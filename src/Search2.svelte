@@ -3,11 +3,11 @@
   import Fuse from 'fuse.js';
   import itemsjs from 'itemsjs';
   import { toHiragana } from './utils/stringHelpers';
-  import configuration from './configuration.json';
+  import configuration from './configuration2.json';
 
   const maxPageButtons = 10;
-  const dataPath = './koban.json';
-  const fuseKeys = ['name', 'yomi', 'prefecture', 'station', 'type', 'address'];
+  const dataPath = './imdb.json';
+  const fuseKeys = ['title_ja', 'title_en'];
   const sortNames = { 'id asc': 'ID(昇順)', 'id desc': 'ID(降順)', 'yomi asc': 'よみ(昇順)', 'yomi desc': 'よみ(降順)' };
   const bucketThreshold = 5; // この件数以上のBucketは折り畳む
 
@@ -246,15 +246,18 @@
   <div class="col-md-9">
     <ul class="list-group list-group-flush">
       {#if itemCount === 0}
-        <p>該当する施設はありません</p>
+        <p>該当する作品はありません</p>
       {:else}
         <p>{itemCount}件の検索結果</p>
-        {#each results.items as { id, prefecture, station, name, type, yomi, address }}
+        {#each results.items as { id, title_ja, title_en, genres, minutes, year }}
           <li class="list-group-item">
             <div class="row">
               <div class="searchable">
-                <h5 class="mb-0"><span class={type === '交番' ? 'text-primary' : 'text-danger'}>{prefecture}</span> {station} <ruby> {name} <rp>(</rp><rt>{toHiragana(yomi)}</rt><rp>)</rp></ruby>{type}</h5>
-                <p class="mb-1"><small>{address}</small></p>
+                <p class="mb-0"><a href="https://www.imdb.com/title/{id}/" target="_blank">{title_ja}</a></p>
+                <p class="mb-1"><i>{title_en}</i><span class="ms-3">{year}年</span><span class="ms-3">{minutes}分</span></p>
+                <p class="mb-1">
+                  {#each genres as genre}<span class="badge text-bg-secondary rounded-pill me-1">{genre}</span>{/each}
+                </p>
               </div>
             </div>
           </li>
