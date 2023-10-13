@@ -1,20 +1,28 @@
 {
     "sortings": {
+        "公開年(新しい順)": {
+            "field": "year",
+            "order": "desc"
+        },
         "公開年(古い順)": {
             "field": "year",
             "order": "asc"
         },
-        "公開年(新しい順)": {
-            "field": "year",
+        "上映時間(長い順)": {
+            "field": "minutes",
             "order": "desc"
         },
         "上映時間(短い順)": {
             "field": "minutes",
             "order": "asc"
         },
-        "上映時間(長い順)": {
-            "field": "minutes",
+        "評価（高い順）": {
+            "field": "averageRating",
             "order": "desc"
+        },
+        "評価（低い順）": {
+            "field": "averageRating",
+            "order": "asc"
         }
     },
     "aggregations": {
