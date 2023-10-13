@@ -3,10 +3,11 @@
   import Fuse from 'fuse.js';
   import itemsjs from 'itemsjs';
   import { toHiragana } from './utils/stringHelpers';
+  import configuration from './configuration2.json';
 
   const maxPageButtons = 10;
-  const dataPath = './koban.json';
-  const fuseKeys = ['name', 'yomi', 'prefecture', 'station', 'type', 'address'];
+  const dataPath = './imdb.json';
+  const fuseKeys = ['title_ja', 'title_en'];
   const sortNames = { 'id asc': 'ID(昇順)', 'id desc': 'ID(降順)', 'yomi asc': 'よみ(昇順)', 'yomi desc': 'よみ(降順)' };
   const bucketThreshold = 5; // この件数以上のBucketは折り畳む
 
@@ -24,40 +25,40 @@
   let items;
   let fuse;
 
-  const configuration = {
-    sortings: {
-      id_asc: {
-        field: 'id',
-        order: 'asc',
-      },
-      id_desc: {
-        field: 'id',
-        order: 'desc',
-      },
-      yomi_asc: {
-        field: 'yomi',
-        order: 'asc',
-      },
-      yomi_desc: {
-        field: 'yomi',
-        order: 'desc',
-      },
-    },
-    aggregations: {
-      type: {
-        title: '交番・駐在所の別',
-        conjunction: false,
-      },
-      prefecture: {
-        title: '都道府県',
-        conjunction: false,
-        size: 47,
-      },
-    },
-    removeStopWordFilter: true,
-    native_search_enabled: false,
-    custom_id_field: 'id',
-  };
+  // const configuration = {
+  //   sortings: {
+  //     id_asc: {
+  //       field: 'id',
+  //       order: 'asc',
+  //     },
+  //     id_desc: {
+  //       field: 'id',
+  //       order: 'desc',
+  //     },
+  //     yomi_asc: {
+  //       field: 'yomi',
+  //       order: 'asc',
+  //     },
+  //     yomi_desc: {
+  //       field: 'yomi',
+  //       order: 'desc',
+  //     },
+  //   },
+  //   aggregations: {
+  //     type: {
+  //       title: '交番・駐在所の別',
+  //       conjunction: false,
+  //     },
+  //     prefecture: {
+  //       title: '都道府県',
+  //       conjunction: false,
+  //       size: 47,
+  //     },
+  //   },
+  //   removeStopWordFilter: true,
+  //   native_search_enabled: false,
+  //   custom_id_field: 'id',
+  // };
 
   function initializeAggregations() {
     Object.keys(configuration.aggregations).forEach((key) => {
@@ -187,7 +188,7 @@
       <label for="sortSelect">並べ替え:</label>
       <select id="sortSelect" bind:value={selectedSort} on:change={updateSort}>
         {#each sortOptions as { value, label } (value)}
-          <option {value}>{sortNames[label]}</option>
+          <option {value}>{value}</option>
         {/each}
       </select>
     </div>
@@ -207,12 +208,12 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
             {#if Array.isArray(details.buckets) && details.buckets.length > bucketThreshold}
-              <button class="list-group-item d-flex align-items-center list-group-item-primary" on:click={() => toggleCollapse(title)}>
+              <button class="list-group-item d-flex align-items-center list-group-item-danger" on:click={() => toggleCollapse(title)}>
                 <span>{details.title}</span><span class="mx-auto" />
                 <span><i class={collapsedState[title] ? 'bi bi-chevron-down' : 'bi bi-chevron-up'} /></span>
               </button>
             {:else}
-              <li class="list-group-item list-group-item-primary">
+              <li class="list-group-item list-group-item-danger">
                 <span>{details.title}</span>
               </li>
             {/if}
@@ -226,7 +227,7 @@
                       >{#if bucket.key}{bucket.key}{:else}N/A{/if}</span
                     >
                     <span class="mx-auto" />
-                    <span class="badge bg-primary rounded-pill">{bucket.doc_count}</span>
+                    <span class="badge bg-danger rounded-pill">{bucket.doc_count}</span>
                   </li>
                 {/if}
               {/each}
@@ -245,15 +246,18 @@
   <div class="col-md-9">
     <ul class="list-group list-group-flush">
       {#if itemCount === 0}
-        <p>該当する施設はありません</p>
+        <p>該当する作品はありません</p>
       {:else}
         <p>{itemCount}件の検索結果</p>
-        {#each results.items as { id, prefecture, station, name, type, yomi, address }}
+        {#each results.items as { id, title_ja, title_en, genres, minutes, year }}
           <li class="list-group-item">
             <div class="row">
               <div class="searchable">
-                <h5 class="mb-0"><span class={type === '交番' ? 'text-primary' : 'text-danger'}>{prefecture}</span> {station} <ruby> {name} <rp>(</rp><rt>{toHiragana(yomi)}</rt><rp>)</rp></ruby>{type}</h5>
-                <p class="mb-1"><small>{address}</small></p>
+                <p class="mb-0"><a href="https://www.imdb.com/title/{id}/" target="_blank">{title_ja}</a></p>
+                <p class="mb-1"><i>{title_en}</i><span class="ms-3">{year}年</span><span class="ms-3">{minutes}分</span></p>
+                <p class="mb-1">
+                  {#each genres as genre}<span class="badge text-bg-secondary rounded-pill me-1">{genre}</span>{/each}
+                </p>
               </div>
             </div>
           </li>
@@ -262,7 +266,7 @@
     </ul>
 
     {#if itemCount > itemsPerPage}
-      <nav aria-label="Page navigation example" class="mt-3 d-flex justify-content-center">
+      <nav aria-label="Page navigation" class="mt-3 d-flex justify-content-center">
         <ul class="pagination">
           <li class="page-item {currentPage === 1 ? 'disabled' : ''}">
             <!-- svelte-ignore a11y-invalid-attribute -->

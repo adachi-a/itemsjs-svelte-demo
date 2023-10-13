@@ -1,0 +1,29 @@
+{
+    "sortings": {
+        "公開年(古い順)": {
+            "field": "year",
+            "order": "asc"
+        },
+        "公開年(新しい順)": {
+            "field": "year",
+            "order": "desc"
+        },
+        "上映時間(短い順)": {
+            "field": "minutes",
+            "order": "asc"
+        },
+        "上映時間(長い順)": {
+            "field": "minutes",
+            "order": "desc"
+        }
+    },
+    "aggregations": {
+        "genres": {
+            "title": "ジャンル",
+            "conjunction": true
+        }
+    },
+    "removeStopWordFilter": true,
+    "native_search_enabled": false,
+    "custom_id_field": "id"
+}
