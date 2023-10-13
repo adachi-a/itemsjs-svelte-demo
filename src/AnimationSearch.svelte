@@ -249,12 +249,12 @@
         <p>該当する作品はありません</p>
       {:else}
         <p>{itemCount}件の検索結果</p>
-        {#each results.items as { id, title_ja, title_en, genres, minutes, year }}
+        {#each results.items as { id, title_ja, title_en, genres, minutes, year, averageRating, numVotes }}
           <li class="list-group-item">
             <div class="row">
               <div class="searchable">
                 <p class="mb-0"><a href="https://www.imdb.com/title/{id}/" target="_blank">{title_ja}</a></p>
-                <p class="mb-1"><i>{title_en}</i><span class="ms-3">{year}年</span><span class="ms-3">{minutes}分</span></p>
+                <p class="mb-1"><i>{title_en}</i><span class="ms-3">{year}年</span><span class="ms-3">{minutes}分</span><span class="ms-3"><span class="text-warning">★</span>{averageRating} <small>({numVotes})</small></span></p>
                 <p class="mb-1">
                   {#each genres as genre}<span class="badge text-bg-secondary rounded-pill me-1">{genre}</span>{/each}
                 </p>
