@@ -1,5 +1,5 @@
 <script>
-  import Search from './Search2.svelte';
+  import Search from './AnimationSearch.svelte';
   import './app.scss';
   import * as bootstrap from 'bootstrap';
 </script>
@@ -8,13 +8,16 @@
   <meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<header class="navbar bg-primary navbar-expand-md" data-bs-theme="dark">
+<header class="navbar bg-danger navbar-expand-md" data-bs-theme="dark">
   <nav class="container-md flex-wrap flex-md-nowrap" aria-label="Main navigation">
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a class="navbar-brand p-0 me-4" href="#"><span>ItemsJS + Svelte</span></a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto" />
       <ul class="navbar-nav mb-2 mb-md-0">
+        <li class="nav-item pe-2">
+          <a class="nav-link" aria-current="page" href="https://adachi-a.github.io/itemsjs-svelte-demo/">交番・派出所</a>
+        </li>
         <li class="nav-item pe-2">
           <a class="nav-link" aria-current="page" href="https://github.com/itemsapi/itemsjs">ItemsJS</a>
         </li>
