@@ -102,6 +102,7 @@
           includeScore: true,
           threshold: 0,
           ignoreLocation: true,
+          useExtendedSearch: true,
         });
         updateResults();
       });
